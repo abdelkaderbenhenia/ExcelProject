@@ -5,7 +5,7 @@
     <classes>
       <class name="test.AddCustomerTest">
         <methods>
-          <include name="validUserShouldBeAbleToCreateCustomer"/>
+          <include name="validUserShouldBeAbleToAddCustomerOnListCustomers"/>
         </methods>
       </class> <!-- test.AddCustomerTest -->
     </classes>

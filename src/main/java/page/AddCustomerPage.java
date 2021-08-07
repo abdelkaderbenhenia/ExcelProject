@@ -43,10 +43,15 @@ public class AddCustomerPage extends BasePage {
 	@FindBy(how = How.XPATH, using = "//*[@id=\"summary\"]")
 	WebElement SUMMARY_PAGE_FIELD;
 
+	@FindBy(how = How.XPATH, using = "//*[@id=\"page-wrapper\"]/div[3]/div[2]/div/div/div[1]/a[1]")
+	WebElement ADD_CUSTOMER_ON_LIST_CUSTOMERS_FIELD;
+	@FindBy(how = How.XPATH, using = "//*[@id=\"foo_filter\"]")
+	WebElement SEARCH_BAR_ON_LIST_CUSTOMERS_FIELD;
+
 	String enterName;
 
 	public void enterFullName(String fULLNANE) {
-
+		waitForElement(driver, 5, FUL_NAME_FIELD);
 		enterName = fULLNANE + generateNumber(999);
 		FUL_NAME_FIELD.sendKeys(enterName);
 	}
@@ -95,18 +100,29 @@ public class AddCustomerPage extends BasePage {
 
 	}
 
+	public void clickAddCustomerOnListCustomers() {
+
+		ADD_CUSTOMER_ON_LIST_CUSTOMERS_FIELD.click();
+
+	}
+
+	public void inserNameOnSearchBarOnListCustomers() {
+
+		SEARCH_BAR_ON_LIST_CUSTOMERS_FIELD.sendKeys(enterName);
+
+	}
+
 	// tbody/tr[1]/td[3]
-/*public void verifyEnterName() {
-		
-		String befor_Xpath="//tbody/tr[";
-		String after_Xpath="]/td[3]";
-		
-		for(int i=1 ;i<=10;i++) {
-			String name=driver.findElement(By.xpath(befor_Xpath+ i +after_Xpath)).getText();
-			System.out.println(name);
-			Assert.assertEquals(name, enterName, "enter name doest exist!!!");
-			break;
-		}*/
+	/*
+	 * public void verifyEnterName() {
+	 * 
+	 * String befor_Xpath="//tbody/tr["; String after_Xpath="]/td[3]";
+	 * 
+	 * for(int i=1 ;i<=10;i++) { String
+	 * name=driver.findElement(By.xpath(befor_Xpath+ i +after_Xpath)).getText();
+	 * System.out.println(name); Assert.assertEquals(name, enterName,
+	 * "enter name doest exist!!!"); break; }
+	 */
 
 	public void verifyEnterNameAndDelete() {
 
@@ -115,18 +131,39 @@ public class AddCustomerPage extends BasePage {
 
 		for (int i = 1; i <= 10; i++) {
 			String name = driver.findElement(By.xpath(befor_Xpath + i + after_Xpath)).getText();
-		/*	System.out.println(name);
-			Assert.assertEquals(name, enterName, "enter name doest exist!!!");
-			break;  */
-			
-			if(name.contains(enterName)) {
+			/*
+			 * System.out.println(name); Assert.assertEquals(name, enterName,
+			 * "enter name doest exist!!!"); break;
+			 */
+
+			if (name.contains(enterName)) {
 				System.out.println("Enter name existe.");
-				
+
 				// tbody/tr[1]/td[3]/following-sibling::td[4]/a[2]
-				
-				driver.findElement(By.xpath(befor_Xpath+ i +"]/td[3]/following-sibling::td[4]/a[2]")).click();
+
+				driver.findElement(By.xpath(befor_Xpath + i + "]/td[3]/following-sibling::td[4]/a[2]")).click();
 			}
 		}
 
 	}
-}
+
+	public void verifySearchBarAndSmmaryButtonOnListCustomer() {
+
+		String befor_Xpath = "//tbody/tr[";
+		String after_Xpath = "]/td[3]";
+
+		for (int i = 1; i <= 10; i++) {
+			String name = driver.findElement(By.xpath(befor_Xpath + i + after_Xpath)).getText();
+			System.out.println(name);
+			/*
+			 * Assert.assertEquals(name, enterName, "enter name doest exist!!!"); break;
+			 */
+
+			if (name.contains(enterName)) {
+				System.out.println("Enter name existe.");
+				driver.findElement(By.xpath(befor_Xpath + i + "]/td[3]/following-sibling::td[4]/a[1]")).click();
+			}
+			break;
+		}
+	}
+} 
